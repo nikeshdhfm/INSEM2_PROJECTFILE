@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Like Button</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #f4f6f9;
+        }
+
+        .card {
+            background: white;
+            padding: 35px;
+            border-radius: 14px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 0;
+            color: #222;
+        }
+
+        .like-area {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+        }
+
+        button {
+            background: #1877f2;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            font-size: 17px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background: #125fc4;
+            transform: translateY(-1px);
+        }
+
+        button.liked {
+            background: #e63946;
+        }
+
+        #count {
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+            min-width: 24px;
+        }
+
+        .hint {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <main class="card">
+        <h1>Like Button</h1>
+
+        <div class="like-area">
+            <button id="likeBtn" type="button" aria-pressed="false">
+                👍 Like
+            </button>
+            <span id="count" aria-live="polite">0</span>
+        </div>
+
+        <p class="hint">Click Like to add a like. Click again to unlike.</p>
+    </main>
+
+    <script>
+        let likes = 0;
+        let liked = false;
+
+        const likeBtn = document.getElementById("likeBtn");
+        const count = document.getElementById("count");
+
+        likeBtn.addEventListener("click", function () {
+            if (!liked) {
+                likes++;
+                liked = true;
+                likeBtn.textContent = "❤️ Liked";
+                likeBtn.classList.add("liked");
+                likeBtn.setAttribute("aria-pressed", "true");
+            } else {
+                likes--;
+                liked = false;
+                likeBtn.textContent = "👍 Like";
+                likeBtn.classList.remove("liked");
+                likeBtn.setAttribute("aria-pressed", "false");
+            }
+
+            count.textContent = likes;
+        });
+    </script>
+</body>
+</html>
